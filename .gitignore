@@ -1,3 +1,4 @@
-/node_modeles
+/node_modules
 .env
 .qodo
+pnpm-lock.yaml
