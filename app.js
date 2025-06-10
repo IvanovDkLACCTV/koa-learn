@@ -21,7 +21,7 @@ render(app, {
 
 //Index page
 router.get("/", async (ctx) => {
-  await ctx.render("index", { title: "Welcome to Koa" }) //рендерим шаблон index
+  await ctx.render("index", { title: "Things I Love" }) //рендерим шаблон index
   log("GET request to /") //логируем запрос
 })
 
