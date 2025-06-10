@@ -1,1 +1,11 @@
 <h1><%- title %></h1>
+
+<ul class="list-group">
+  <!-- внутри <% %> пишем, как в JS -->
+  <% things.forEach(thing => { %>
+  <li class="list-group-item">
+    <%= thing %>
+    <!-- нужен чтобы выводить переменные  -->
+  </li>
+  <% })%>
+</ul>

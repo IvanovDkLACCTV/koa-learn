@@ -8,6 +8,9 @@ const render = require("koa-ejs") //подключаем модуль для р�
 const app = new Koa() //подключение к фреймворку
 const router = new KoaRouter() //создаем новый роутер
 
+//В реальном проекте нужно использовать базу данных, но для простоты примера мы будем использовать статические данные
+const thingsILove = ["Coding", "Coffee", "Music", "Nature", "Traveling"] //массив с данными, которые мы будем отображать на странице
+
 //JSON prettier Middleware
 app.use(json()) //включаем обработку JSON
 
@@ -21,7 +24,7 @@ render(app, {
 
 //Index page
 router.get("/", async (ctx) => {
-  await ctx.render("index", { title: "Things I Love" }) //рендерим шаблон index
+  await ctx.render("index", { title: "Things I Love", things: thingsILove }) //рендерим шаблон index
   log("GET request to /") //логируем запрос
 })
 
