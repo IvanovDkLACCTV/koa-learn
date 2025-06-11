@@ -17,6 +17,9 @@ app.use(json()) //включаем обработку JSON
 //Body Parser Middleware
 app.use(bodyParser()) //включаем парсер тела запроса
 
+//Добавляем дополнительные свойства к контексту приложения
+app.context.user = "Guest" //добавляем свойство user к контексту приложения
+
 render(app, {
   root: path.join(__dirname, "views"), //указываем путь к папке с шаблонами
   layout: "layout", //указываем имя файла шаблона
@@ -46,6 +49,8 @@ async function addThing(ctx) {
   thingsILove.push(body.thing) //добавляем новый элемент в массив
   ctx.redirect("/") //перенаправляем на главную страницу
 }
+
+router.get("/test", (ctx) => (ctx.body = `Hi ${ctx.user}`)) //тестовый маршрут для проверки работы роутера
 
 //Router Middleware
 app.use(router.routes()) //подключаем роутер к приложению
