@@ -51,6 +51,7 @@ async function addThing(ctx) {
 }
 
 router.get("/test", (ctx) => (ctx.body = `Hi ${ctx.user}`)) //тестовый маршрут для проверки работы роутера
+router.get("/test2/:name", (ctx) => (ctx.body = `Hi ${ctx.params.name}`)) //тестовый маршрут с параметром
 
 //Router Middleware
 app.use(router.routes()) //подключаем роутер к приложению
