@@ -4,6 +4,7 @@ const json = require("koa-json") //подключаем модуль для ра
 const KoaRouter = require("koa-router") //подключаем роутер
 const path = require("path") //подключаем модуль для работы с путями
 const render = require("koa-ejs") //подключаем модуль для работы с шаблонами
+const bodyParser = require("koa-bodyparser") //подключаем модуль для парсинга тела запроса
 
 const app = new Koa() //подключение к фреймворку
 const router = new KoaRouter() //создаем новый роутер
@@ -13,6 +14,8 @@ const thingsILove = ["Coding", "Coffee", "Music", "Nature", "Traveling"] //ма�
 
 //JSON prettier Middleware
 app.use(json()) //включаем обработку JSON
+//Body Parser Middleware
+app.use(bodyParser()) //включаем парсер тела запроса
 
 render(app, {
   root: path.join(__dirname, "views"), //указываем путь к папке с шаблонами
@@ -25,6 +28,7 @@ render(app, {
 //Routes
 router.get("/", index)
 router.get("/add", showAdd) //обрабатываем GET запрос на /add
+router.post("/add", addThing) //обрабатываем POST запрос на /add
 
 //функции для обработки GET запросов
 async function showAdd(ctx) {
@@ -34,6 +38,13 @@ async function showAdd(ctx) {
 async function index(ctx) {
   await ctx.render("index", { title: "Things I Love", things: thingsILove }) //рендерим шаблон index
   log("GET request to /") //логируем запрос
+}
+
+//функция для обработки POST запроса
+async function addThing(ctx) {
+  const body = ctx.request.body //получаем данные из тела запроса
+  thingsILove.push(body.thing) //добавляем новый элемент в массив
+  ctx.redirect("/") //перенаправляем на главную страницу
 }
 
 //Router Middleware
