@@ -22,6 +22,15 @@ render(app, {
   debug: false, //включаем режим отладки
 })
 
+//Routes
+router.get("/", index)
+//функция для обработки GET запроса на корневой путь
+
+async function index(ctx) {
+  await ctx.render("index", { title: "Things I Love", things: thingsILove }) //рендерим шаблон index
+  log("GET request to /") //логируем запрос
+}
+
 //Index page
 router.get("/", async (ctx) => {
   await ctx.render("index", { title: "Things I Love", things: thingsILove }) //рендерим шаблон index
