@@ -24,23 +24,17 @@ render(app, {
 
 //Routes
 router.get("/", index)
-//функция для обработки GET запроса на корневой путь
+router.get("/add", showAdd) //обрабатываем GET запрос на /add
 
+//функции для обработки GET запросов
+async function showAdd(ctx) {
+  await ctx.render("add") //рендерим шаблон add
+  log("GET request to /add") //логируем запрос
+}
 async function index(ctx) {
   await ctx.render("index", { title: "Things I Love", things: thingsILove }) //рендерим шаблон index
   log("GET request to /") //логируем запрос
 }
-
-//Index page
-router.get("/", async (ctx) => {
-  await ctx.render("index", { title: "Things I Love", things: thingsILove }) //рендерим шаблон index
-  log("GET request to /") //логируем запрос
-})
-
-router.get("/test", async (ctx) => {
-  ctx.body = { message: "Hello, World!" } //обрабатываем GET запрос на /test
-  log("GET request to /test") //логируем запрос
-})
 
 //Router Middleware
 app.use(router.routes()) //подключаем роутер к приложению
