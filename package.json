@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "koa": "^3.0.0",
+    "koa-bodyparser": "^4.4.1",
     "koa-ejs": "^4.3.0",
     "koa-json": "^2.0.2",
     "koa-router": "^13.0.1"
